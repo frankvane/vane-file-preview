@@ -5,12 +5,12 @@
 
 export const createIsolatedContainer = (
   baseStyles: React.CSSProperties = {}
-) => ({
+): React.CSSProperties => ({
   height: "100%",
   width: "100%",
   position: "relative",
   overflow: "hidden",
-  isolation: "isolate", // 创建新的层叠上下文，隔离样式
+  isolation: "isolate" as const, // 创建新的层叠上下文，隔离样式
   contain: "layout style", // 限制样式和布局的影响范围
   ...baseStyles,
 });

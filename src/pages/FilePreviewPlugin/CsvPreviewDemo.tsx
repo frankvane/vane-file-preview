@@ -62,8 +62,6 @@ export default function CsvPreviewDemo() {
       maxPreviewRows: 500,
       autoDetectDelimiter: true,
       autoDetectEncoding: true,
-      enableDownload: true,
-      enableSearch: true,
     }),
   ]);
 

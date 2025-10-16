@@ -107,7 +107,7 @@ function App() {
     name: "example.pdf",
     url: "/path/to/example.pdf",
     size: 1024000,
-    type: "application/pdf"
+    type: "application/pdf",
   };
 
   return (
@@ -158,7 +158,7 @@ function App() {
     name: "data.json",
     url: "/path/to/data.json",
     size: 2048,
-    type: "application/json"
+    type: "application/json",
   };
 
   return (
@@ -280,48 +280,48 @@ export default function FilePreviewDemo() {
 
 ### 📄 文档预览插件
 
-| 插件                        | 支持格式 | 主要功能                           |
-| --------------------------- | -------- | ---------------------------------- |
-| `createPdfPreviewPlugin`    | PDF      | 页面导航、缩放、文本选择、搜索     |
-| `createDocxPreviewPlugin`   | DOCX     | 文档渲染、样式保持、图片显示       |
-| `createXlsxPreviewPlugin`   | XLSX     | 表格预览、工作表切换、数据筛选     |
-| `createMarkdownPreviewPlugin` | MD     | Markdown 渲染、数学公式、代码高亮  |
-| `createEpubPreviewPlugin`   | EPUB     | 电子书阅读、章节导航、字体调节     |
+| 插件                          | 支持格式 | 主要功能                          |
+| ----------------------------- | -------- | --------------------------------- |
+| `createPdfPreviewPlugin`      | PDF      | 页面导航、缩放、文本选择、搜索    |
+| `createDocxPreviewPlugin`     | DOCX     | 文档渲染、样式保持、图片显示      |
+| `createXlsxPreviewPlugin`     | XLSX     | 表格预览、工作表切换、数据筛选    |
+| `createMarkdownPreviewPlugin` | MD       | Markdown 渲染、数学公式、代码高亮 |
+| `createEpubPreviewPlugin`     | EPUB     | 电子书阅读、章节导航、字体调节    |
 
 ### 💻 代码预览插件
 
-| 插件                        | 支持格式 | 主要功能                           |
-| --------------------------- | -------- | ---------------------------------- |
-| `createCodePreviewPlugin`   | 180+ 语言 | 语法高亮、行号、代码折叠、主题切换 |
-| `createJsonPreviewPlugin`   | JSON     | 结构化显示、搜索、折叠、主题切换   |
+| 插件                      | 支持格式  | 主要功能                           |
+| ------------------------- | --------- | ---------------------------------- |
+| `createCodePreviewPlugin` | 180+ 语言 | 语法高亮、行号、代码折叠、主题切换 |
+| `createJsonPreviewPlugin` | JSON      | 结构化显示、搜索、折叠、主题切换   |
 
 ### 📊 数据预览插件
 
-| 插件                        | 支持格式 | 主要功能                           |
-| --------------------------- | -------- | ---------------------------------- |
-| `createCsvPreviewPlugin`    | CSV/TSV  | 表格显示、分页、排序、筛选         |
+| 插件                     | 支持格式 | 主要功能                   |
+| ------------------------ | -------- | -------------------------- |
+| `createCsvPreviewPlugin` | CSV/TSV  | 表格显示、分页、排序、筛选 |
 
 ### 🖼️ 媒体预览插件
 
-| 插件                        | 支持格式 | 主要功能                           |
-| --------------------------- | -------- | ---------------------------------- |
-| `createImagePreviewPlugin`  | JPG/PNG/GIF/SVG | 缩放、旋转、全屏查看        |
-| `createVideoPreviewPlugin`  | MP4/WebM/OGV | 播放控制、进度条、音量调节     |
-| `createAudioPreviewPlugin`  | MP3/WAV/OGG | 音频播放、波形显示、播放列表   |
+| 插件                       | 支持格式        | 主要功能                     |
+| -------------------------- | --------------- | ---------------------------- |
+| `createImagePreviewPlugin` | JPG/PNG/GIF/SVG | 缩放、旋转、全屏查看         |
+| `createVideoPreviewPlugin` | MP4/WebM/OGV    | 播放控制、进度条、音量调节   |
+| `createAudioPreviewPlugin` | MP3/WAV/OGG     | 音频播放、波形显示、播放列表 |
 
 ### 🗜️ 压缩包预览插件
 
-| 插件                        | 支持格式 | 主要功能                           |
-| --------------------------- | -------- | ---------------------------------- |
-| `createZipPreviewPlugin`    | ZIP      | 文件列表、目录树、文件提取         |
+| 插件                     | 支持格式 | 主要功能                   |
+| ------------------------ | -------- | -------------------------- |
+| `createZipPreviewPlugin` | ZIP      | 文件列表、目录树、文件提取 |
 
 ### 🔧 通用插件
 
-| 插件                        | 说明                               |
-| --------------------------- | ---------------------------------- |
-| `createDownloadPlugin`      | 文件下载功能                       |
-| `createErrorBoundaryPlugin` | 错误边界处理                       |
-| `createLoadingPlugin`       | 加载状态显示                       |
+| 插件                        | 说明         |
+| --------------------------- | ------------ |
+| `createDownloadPlugin`      | 文件下载功能 |
+| `createErrorBoundaryPlugin` | 错误边界处理 |
+| `createLoadingPlugin`       | 加载状态显示 |
 
 > 💡 **提示**：所有插件都可以通过 `vane-file-preview` 包导入。详细配置请参考 [API 文档](#api-文档) 或查看 [在线演示](https://chinavane.netlify.app/)。
 
@@ -410,10 +410,10 @@ interface FilePreviewCoreProps {
 }
 
 interface FileInfo {
-  name: string;      // 文件名
-  url: string;       // 文件 URL
-  size?: number;     // 文件大小（字节）
-  type?: string;     // MIME 类型
+  name: string; // 文件名
+  url: string; // 文件 URL
+  size?: number; // 文件大小（字节）
+  type?: string; // MIME 类型
 }
 ```
 
@@ -421,8 +421,8 @@ interface FileInfo {
 
 ```typescript
 interface FilePreviewCoreRef {
-  reload: () => void;           // 重新加载文件
-  reset: () => void;            // 重置组件状态
+  reload: () => void; // 重新加载文件
+  reset: () => void; // 重置组件状态
   getState: () => PreviewStateInfo; // 获取当前状态
 }
 ```
@@ -435,13 +435,17 @@ interface FilePreviewCoreRef {
 function withPlugins<T extends ComponentType<any>>(
   Component: T,
   plugins: Plugin[]
-): ComponentType<ComponentProps<T>>
+): ComponentType<ComponentProps<T>>;
 ```
 
 #### 使用示例
 
 ```typescript
-import { FilePreviewCore, withPlugins, createPdfPreviewPlugin } from "vane-file-preview";
+import {
+  FilePreviewCore,
+  withPlugins,
+  createPdfPreviewPlugin,
+} from "vane-file-preview";
 
 const EnhancedFilePreview = withPlugins(FilePreviewCore, [
   createPdfPreviewPlugin({
@@ -599,7 +603,13 @@ export function createCustomPreviewPlugin(options = {}) {
       return file.type === "application/custom";
     },
 
-    render: ({ file, containerRef, onLoadStart, onLoadSuccess, onLoadError }) => {
+    render: ({
+      file,
+      containerRef,
+      onLoadStart,
+      onLoadSuccess,
+      onLoadError,
+    }) => {
       // 渲染预览内容
       return (
         <div ref={containerRef}>
@@ -651,10 +661,7 @@ const ThemedFilePreview = withPlugins(FilePreviewCore, [
 // 运行时主题切换
 const [theme, setTheme] = useState("auto");
 
-<ThemedFilePreview
-  file={fileInfo}
-  theme={theme}
-/>
+<ThemedFilePreview file={fileInfo} theme={theme} />;
 ```
 
 ### 性能优化
@@ -689,9 +696,7 @@ const VirtualizedPreview = withPlugins(FilePreviewCore, [
 ```tsx
 const RobustFilePreview = withPlugins(FilePreviewCore, [
   createErrorBoundaryPlugin({
-    fallback: (error) => (
-      <div>预览失败：{error.message}</div>
-    ),
+    fallback: (error) => <div>预览失败：{error.message}</div>,
   }),
   // 其他插件...
 ]);
@@ -783,5 +788,3 @@ git commit -m "perf: 优化大文件加载性能"
 **如果这个项目对您有帮助，请给我们一个 ⭐️**
 
 [⬆️ 回到顶部](#-vane-file-preview)
-
-</div>

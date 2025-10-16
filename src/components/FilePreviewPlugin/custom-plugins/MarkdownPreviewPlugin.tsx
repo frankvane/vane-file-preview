@@ -3,8 +3,9 @@
  * 使用 react-markdown 和 remark-gfm 进行专业的 Markdown 解析
  */
 
-import "highlight.js/styles/github.css";
-import "highlight.js/styles/github-dark.css";
+// 移除全局 CSS 导入，避免影响整体页面样式
+// import "highlight.js/styles/github.css";
+// import "highlight.js/styles/github-dark.css";
 
 import {
   FileInfo,

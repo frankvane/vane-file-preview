@@ -4,14 +4,11 @@ import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import React, { Suspense } from "react";
 
 // 懒加载组件
-const FilePreviewHome = React.lazy(
-  () => import("./pages/FilePreviewPlugin/Home")
-);
-const ReadmeDemo = React.lazy(
-  () => import("./pages/FilePreviewPlugin/ReadmeDemo")
-);
 const FilePreviewExample = React.lazy(
   () => import("./pages/FilePreviewPlugin/Example")
+);
+const BasicPreviewDemo = React.lazy(
+  () => import("./pages/FilePreviewPlugin/BasicPreviewDemo")
 );
 const ImagePreviewDemo = React.lazy(
   () => import("./pages/FilePreviewPlugin/ImagePreviewDemo")
@@ -72,10 +69,10 @@ const App: React.FC = () => {
           <NavLink to="/" end>
             首页
           </NavLink>
-          <NavLink to="/readme">README 文档</NavLink>
 
           <h3 style={{ marginTop: 12 }}>基础预览</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <NavLink to="/file-preview/basic">基础文件预览</NavLink>
             <NavLink to="/file-preview/image">图片预览</NavLink>
             <NavLink to="/file-preview/pdf">PDF预览</NavLink>
             <NavLink to="/file-preview/video">视频预览</NavLink>
@@ -110,11 +107,8 @@ const App: React.FC = () => {
       <main className="main">
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
-            {/* 首页和文档路由 */}
-            <Route path="/" element={<FilePreviewHome />} />
-            <Route path="/readme" element={<ReadmeDemo />} />
-
             {/* 基础预览路由 */}
+            <Route path="/file-preview/basic" element={<BasicPreviewDemo />} />
             <Route path="/file-preview/image" element={<ImagePreviewDemo />} />
             <Route path="/file-preview/pdf" element={<PdfPreviewDemo />} />
             <Route path="/file-preview/video" element={<VideoPreviewDemo />} />
@@ -143,7 +137,10 @@ const App: React.FC = () => {
             <Route path="/fp-plugin/example" element={<FilePreviewExample />} />
 
             {/* 默认重定向 */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route
+              path="*"
+              element={<Navigate to="/file-preview/basic" replace />}
+            />
           </Routes>
         </Suspense>
       </main>

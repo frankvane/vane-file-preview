@@ -12,7 +12,18 @@ type DemoPageProps = {
 
 // 路由路径到文件名的映射
 const routeToFileMap: Record<string, string> = {
-
+  "/file-preview/basic": "BasicPreviewDemo",
+  "/file-preview/image": "ImagePreviewDemo",
+  "/file-preview/pdf": "PdfPreviewDemo",
+  "/file-preview/video": "VideoPreviewDemo",
+  "/file-preview/audio": "AudioPreviewDemo",
+  "/file-preview/code": "CodePreviewDemo",
+  "/file-preview/markdown": "MarkdownPreviewDemo",
+  "/file-preview/office": "OfficePreviewDemo",
+  "/file-preview/csv": "CsvPreviewDemo",
+  "/file-preview/json": "JsonPreviewDemo",
+  "/file-preview/zip": "ZipPreviewDemo",
+  "/file-preview/epub": "EpubPreviewDemo",
 };
 
 const DemoPage: React.FC<DemoPageProps> = ({
@@ -22,6 +33,7 @@ const DemoPage: React.FC<DemoPageProps> = ({
 }) => {
   const location = useLocation();
   const [sourceCode, setSourceCode] = useState<string>("");
+  const [copied, setCopied] = useState<boolean>(false);
 
   useEffect(() => {
     const loadSourceCode = async () => {
@@ -42,6 +54,16 @@ const DemoPage: React.FC<DemoPageProps> = ({
     loadSourceCode();
   }, [location.pathname]);
 
+  const handleCopyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(sourceCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error("复制失败:", error);
+    }
+  };
+
   return (
     <div className="page">
       <div className="page-header">
@@ -52,7 +74,55 @@ const DemoPage: React.FC<DemoPageProps> = ({
 
       {sourceCode && (
         <div className="page-card" style={{ marginTop: "20px" }}>
-          <h2 style={{ marginBottom: "10px", fontSize: "1.2em" }}>源码</h2>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "10px",
+            }}
+          >
+            <h2 style={{ margin: 0, fontSize: "1.2em" }}>源码</h2>
+            <button
+              onClick={handleCopyCode}
+              style={{
+                padding: "8px 16px",
+                background: copied ? "#27ae60" : "#3498db",
+                color: "#fff",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontSize: "14px",
+                fontWeight: 500,
+                transition: "all 0.2s ease",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+              onMouseEnter={(e) => {
+                if (!copied) {
+                  e.currentTarget.style.background = "#2980b9";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!copied) {
+                  e.currentTarget.style.background = "#3498db";
+                }
+              }}
+            >
+              {copied ? (
+                <>
+                  <span>✓</span>
+                  <span>已复制</span>
+                </>
+              ) : (
+                <>
+                  <span>📋</span>
+                  <span>复制代码</span>
+                </>
+              )}
+            </button>
+          </div>
           <SyntaxHighlighter
             language="tsx"
             style={tomorrow}

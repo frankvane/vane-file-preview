@@ -5,6 +5,7 @@
 
 import type { FilePreviewPlugin, PluginContext } from "../plugins/types";
 import React, { useState } from "react";
+import { createIsolatedContainer } from "./styles/isolatedStyles";
 
 export interface OfficePreviewPluginConfig {
   viewer?: "microsoft" | "google" | "auto";
@@ -134,13 +135,9 @@ const OfficePreviewComponent: React.FC<{
 
   return (
     <div
-      style={{
-        width: "100%",
-        height: "100%",
+      style={createIsolatedContainer({
         background: "#f5f5f5",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      })}
     >
       {/* 当在本地开发时给出提示（绝对定位叠加，不参与布局） */}
       {(() => {

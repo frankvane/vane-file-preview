@@ -12,6 +12,7 @@ import {
 } from "./shared/ToolbarComponents";
 import type { FilePreviewPlugin, PluginContext } from "../plugins/types";
 import React, { useEffect, useMemo, useState } from "react";
+import { createIsolatedContainer } from "./styles/isolatedStyles";
 
 import JSZip from "jszip";
 
@@ -190,12 +191,11 @@ const PptxPreviewComponent: React.FC<{
 
   return (
     <div
-      style={{
-        height: "100%",
+      style={createIsolatedContainer({
         background: "#1a1a1a",
         display: "flex",
         flexDirection: "column",
-      }}
+      })}
     >
       {/* PowerPoint 风格的顶部工具栏 */}
       <div
@@ -268,6 +268,40 @@ const PptxPreviewComponent: React.FC<{
           >
             ▶
           </button>
+
+          {/* 快速跳转输入框 */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              marginLeft: "8px",
+            }}
+          >
+            <span style={{ fontSize: "11px", color: "#ccc" }}>跳转:</span>
+            <input
+              type="number"
+              min="1"
+              max={slides.length}
+              value={active + 1}
+              onChange={(e) => {
+                const value = parseInt(e.target.value);
+                if (value >= 1 && value <= slides.length) {
+                  setActive(value - 1);
+                }
+              }}
+              style={{
+                width: "50px",
+                padding: "4px 6px",
+                border: "1px solid #4a5568",
+                borderRadius: "3px",
+                background: "#2c3e50",
+                color: "#fff",
+                fontSize: "11px",
+                textAlign: "center",
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -356,39 +390,120 @@ const PptxPreviewComponent: React.FC<{
         </div>
       </div>
 
-      {/* 底部缩略图导航 */}
+      {/* 底部缩略图导航 - 智能显示 */}
       <div
         style={{
           background: "#34495e",
-          padding: "16px 20px",
+          padding: "12px 20px",
           display: "flex",
+          alignItems: "center",
           gap: "8px",
           overflowX: "auto",
           borderTop: "1px solid #4a5568",
+          maxHeight: "50px", // 进一步限制高度
         }}
       >
-        {slides.map((slide, idx) => (
+        {/* 显示前几个幻灯片 */}
+        {slides.slice(0, 3).map((slide, idx) => (
           <button
             key={idx}
             onClick={() => setActive(idx)}
             style={{
-              padding: "8px 12px",
-              border: "2px solid",
+              padding: "4px 8px",
+              border: "1px solid",
               borderColor: active === idx ? "#3498db" : "#4a5568",
-              borderRadius: "6px",
+              borderRadius: "3px",
               background: active === idx ? "#3498db" : "#4a5568",
               color: "#fff",
               cursor: "pointer",
-              fontSize: "12px",
-              minWidth: "60px",
+              fontSize: "10px",
+              minWidth: "30px",
               textAlign: "center",
               transition: "all 0.2s",
               whiteSpace: "nowrap",
+              flexShrink: 0,
             }}
           >
-            Slide {idx + 1}
+            {idx + 1}
           </button>
         ))}
+
+        {/* 如果当前幻灯片不在前3个，显示当前幻灯片 */}
+        {active >= 3 && (
+          <>
+            <span style={{ color: "#999", fontSize: "10px" }}>...</span>
+            <button
+              onClick={() => setActive(active)}
+              style={{
+                padding: "4px 8px",
+                border: "1px solid #3498db",
+                borderRadius: "3px",
+                background: "#3498db",
+                color: "#fff",
+                cursor: "pointer",
+                fontSize: "10px",
+                minWidth: "30px",
+                textAlign: "center",
+                transition: "all 0.2s",
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+              }}
+            >
+              {active + 1}
+            </button>
+          </>
+        )}
+
+        {/* 如果当前幻灯片不在最后3个，显示省略号 */}
+        {active < slides.length - 3 && (
+          <span style={{ color: "#999", fontSize: "10px" }}>...</span>
+        )}
+
+        {/* 显示最后几个幻灯片 */}
+        {slides.length > 3 &&
+          slides.slice(-3).map((slide, idx) => {
+            const actualIndex = slides.length - 3 + idx;
+            if (actualIndex <= active && active < slides.length - 3)
+              return null; // 避免重复显示当前幻灯片
+            return (
+              <button
+                key={actualIndex}
+                onClick={() => setActive(actualIndex)}
+                style={{
+                  padding: "4px 8px",
+                  border: "1px solid",
+                  borderColor: active === actualIndex ? "#3498db" : "#4a5568",
+                  borderRadius: "3px",
+                  background: active === actualIndex ? "#3498db" : "#4a5568",
+                  color: "#fff",
+                  cursor: "pointer",
+                  fontSize: "10px",
+                  minWidth: "30px",
+                  textAlign: "center",
+                  transition: "all 0.2s",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                }}
+              >
+                {actualIndex + 1}
+              </button>
+            );
+          })}
+
+        {/* 总幻灯片数提示 */}
+        <div
+          style={{
+            padding: "4px 8px",
+            color: "#999",
+            fontSize: "10px",
+            display: "flex",
+            alignItems: "center",
+            flexShrink: 0,
+            marginLeft: "8px",
+          }}
+        >
+          ({slides.length} slides)
+        </div>
       </div>
     </div>
   );

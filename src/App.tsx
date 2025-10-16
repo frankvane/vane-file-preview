@@ -46,6 +46,9 @@ const ZipPreviewDemo = React.lazy(
 const EpubPreviewDemo = React.lazy(
   () => import("./pages/FilePreviewPlugin/EpubPreviewDemo")
 );
+const XmlPreviewDemo = React.lazy(
+  () => import("./pages/FilePreviewPlugin/XmlPreviewDemo")
+);
 
 // 加载中组件
 const LoadingFallback = () => (
@@ -93,6 +96,7 @@ const App: React.FC = () => {
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             <NavLink to="/file-preview/csv">CSV预览</NavLink>
             <NavLink to="/file-preview/json">JSON预览</NavLink>
+            <NavLink to="/file-preview/xml">XML预览</NavLink>
           </div>
 
           <h3 style={{ marginTop: 12 }}>压缩文件预览</h3>
@@ -134,6 +138,7 @@ const App: React.FC = () => {
             {/* 数据预览路由 */}
             <Route path="/file-preview/csv" element={<CsvPreviewDemo />} />
             <Route path="/file-preview/json" element={<JsonPreviewDemo />} />
+            <Route path="/file-preview/xml" element={<XmlPreviewDemo />} />
 
             {/* 压缩文件预览路由 */}
             <Route path="/file-preview/zip" element={<ZipPreviewDemo />} />

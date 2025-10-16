@@ -42,3 +42,5 @@ export { createPptxPreviewPlugin } from "./PptxPreviewPlugin";
 export { createSimpleReactReaderEpubPlugin } from "./SimpleReactReaderEpubPlugin";
 export { createCsvPreviewPlugin } from "./CsvPreviewPlugin";
 export { createJsonPreviewPlugin } from "./JsonPreviewPlugin";
+export { createXmlPreviewPlugin } from "./XmlPreviewPlugin";
+export type { XmlPreviewConfig } from "./XmlPreviewPlugin";

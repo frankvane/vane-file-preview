@@ -12,7 +12,6 @@ type DemoPageProps = {
 
 // 路由路径到文件名的映射
 const routeToFileMap: Record<string, string> = {
-  "/file-preview/basic": "BasicPreviewDemo",
   "/file-preview/image": "ImagePreviewDemo",
   "/file-preview/pdf": "PdfPreviewDemo",
   "/file-preview/video": "VideoPreviewDemo",
@@ -24,6 +23,7 @@ const routeToFileMap: Record<string, string> = {
   "/file-preview/json": "JsonPreviewDemo",
   "/file-preview/zip": "ZipPreviewDemo",
   "/file-preview/epub": "EpubPreviewDemo",
+  "/fp-plugin/example": "Example",
 };
 
 const DemoPage: React.FC<DemoPageProps> = ({

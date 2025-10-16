@@ -5,6 +5,7 @@
 
 import type { FilePreviewPlugin, PluginContext } from "../plugins/types";
 import React, { useEffect, useMemo, useState } from "react";
+
 import JSZip from "jszip";
 
 export interface ZipPreviewPluginConfig {
@@ -117,7 +118,6 @@ const ZipPreviewComponent: React.FC<{ context: PluginContext }> = ({
       style={{
         padding: 16,
         height: "100%",
-        overflow: "auto",
         background: "#fafafa",
       }}
     >
@@ -149,7 +149,9 @@ const ZipPreviewComponent: React.FC<{ context: PluginContext }> = ({
               <span style={{ marginRight: 8 }}>
                 {entry.isDirectory ? "📁" : "📄"}
               </span>
-              <span style={{ flex: 1, wordBreak: "break-all" }}>{entry.name}</span>
+              <span style={{ flex: 1, wordBreak: "break-all" }}>
+                {entry.name}
+              </span>
               {!entry.isDirectory && (
                 <span style={{ color: "#666", fontSize: 12 }}>
                   {entry.size > 0
@@ -170,7 +172,8 @@ const ZipPreviewComponent: React.FC<{ context: PluginContext }> = ({
             color: "#666",
           }}
         >
-          说明：当前展示为 zip 内容列表。若需要在线预览某些文本文件，可在此基础上按需增加点击后解析小文件的预览逻辑。
+          说明：当前展示为 zip
+          内容列表。若需要在线预览某些文本文件，可在此基础上按需增加点击后解析小文件的预览逻辑。
         </div>
       </div>
     </div>

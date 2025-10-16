@@ -23,7 +23,7 @@ import { monokaiTheme } from "@uiw/react-json-view/monokai";
 import { nordTheme } from "@uiw/react-json-view/nord";
 import { vscodeTheme } from "@uiw/react-json-view/vscode";
 
-interface JsonPreviewConfig {
+export interface JsonPreviewConfig {
   maxFileSize?: number; // 最大文件大小（字节）
   enableSearch?: boolean;
   enableCopy?: boolean;
@@ -61,10 +61,12 @@ const JsonPreviewComponent: React.FC<{
   const [searchResults, setSearchResults] = useState<any[]>([]);
   // 检测系统主题
   const getSystemTheme = () => {
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (typeof window !== "undefined" && window.matchMedia) {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
     }
-    return 'light';
+    return "light";
   };
 
   const [currentTheme, setCurrentTheme] = useState(
@@ -82,7 +84,11 @@ const JsonPreviewComponent: React.FC<{
         setError(null);
 
         console.log("📄 开始解析 JSON 文件:", file.url);
-        console.log("📄 文件信息:", { name: file.name, size: file.size, type: file.type });
+        console.log("📄 文件信息:", {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+        });
 
         // 检查文件大小
         if (file.size && file.size > maxFileSize) {
@@ -99,18 +105,23 @@ const JsonPreviewComponent: React.FC<{
         // 获取文件内容，添加更详细的错误处理
         console.log("📄 正在发起 fetch 请求...");
         const response = await fetch(file.url, {
-          method: 'GET',
+          method: "GET",
           headers: {
-            'Accept': 'application/json,text/plain,*/*',
+            Accept: "application/json,text/plain,*/*",
           },
-          cache: 'no-cache'
+          cache: "no-cache",
         });
-        
+
         console.log("📄 fetch 响应状态:", response.status, response.statusText);
-        console.log("📄 响应头:", Object.fromEntries(response.headers.entries()));
-        
+        console.log(
+          "📄 响应头:",
+          Object.fromEntries(response.headers.entries())
+        );
+
         if (!response.ok) {
-          const errorText = await response.text().catch(() => '无法读取错误信息');
+          const errorText = await response
+            .text()
+            .catch(() => "无法读取错误信息");
           throw new Error(
             `HTTP ${response.status} ${response.statusText}: ${errorText}`
           );
@@ -118,7 +129,10 @@ const JsonPreviewComponent: React.FC<{
 
         const text = await response.text();
         console.log("📄 文件内容长度:", text.length);
-        console.log("📄 文件内容预览:", text.substring(0, 200) + (text.length > 200 ? '...' : ''));
+        console.log(
+          "📄 文件内容预览:",
+          text.substring(0, 200) + (text.length > 200 ? "..." : "")
+        );
 
         // 解析 JSON
         let parsedData;
@@ -291,14 +305,14 @@ const JsonPreviewComponent: React.FC<{
     const themeNames: Record<string, string> = {
       auto: "自动",
       light: "浅色",
-      dark: "深色", 
+      dark: "深色",
       nord: "Nord",
       githubLight: "GitHub 浅色",
       githubDark: "GitHub 深色",
       vscode: "VS Code",
       gruvbox: "Gruvbox",
       monokai: "Monokai",
-      basic: "基础"
+      basic: "基础",
     };
     return themeNames[themeName] || themeName;
   };
@@ -409,12 +423,12 @@ const JsonPreviewComponent: React.FC<{
 
         {/* 主题选择器 */}
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <label 
+          <label
             htmlFor="theme-select"
-            style={{ 
-              fontSize: "12px", 
+            style={{
+              fontSize: "12px",
               color: currentTheme === "dark" ? "#e2e8f0" : "#4a5568",
-              fontWeight: "500"
+              fontWeight: "500",
             }}
           >
             🎨 主题:
@@ -426,7 +440,9 @@ const JsonPreviewComponent: React.FC<{
             style={{
               padding: "4px 8px",
               fontSize: "12px",
-              border: `1px solid ${currentTheme === "dark" ? "#4a5568" : "#d1d5db"}`,
+              border: `1px solid ${
+                currentTheme === "dark" ? "#4a5568" : "#d1d5db"
+              }`,
               borderRadius: "4px",
               backgroundColor: currentTheme === "dark" ? "#374151" : "#ffffff",
               color: currentTheme === "dark" ? "#f9fafb" : "#374151",
@@ -435,19 +451,25 @@ const JsonPreviewComponent: React.FC<{
               minWidth: "100px",
               // 自定义下拉箭头样式
               appearance: "none",
-              backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${currentTheme === "dark" ? "%23f9fafb" : "%23374151"}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e")`,
+              backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${
+                currentTheme === "dark" ? "%23f9fafb" : "%23374151"
+              }' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e")`,
               backgroundRepeat: "no-repeat",
               backgroundPosition: "right 6px center",
               backgroundSize: "12px",
-              paddingRight: "24px"
+              paddingRight: "24px",
             }}
           >
             <option value="auto">{getThemeDisplayName("auto")}</option>
             <option value="light">{getThemeDisplayName("light")}</option>
             <option value="dark">{getThemeDisplayName("dark")}</option>
             <option value="nord">{getThemeDisplayName("nord")}</option>
-            <option value="githubLight">{getThemeDisplayName("githubLight")}</option>
-            <option value="githubDark">{getThemeDisplayName("githubDark")}</option>
+            <option value="githubLight">
+              {getThemeDisplayName("githubLight")}
+            </option>
+            <option value="githubDark">
+              {getThemeDisplayName("githubDark")}
+            </option>
             <option value="vscode">{getThemeDisplayName("vscode")}</option>
             <option value="gruvbox">{getThemeDisplayName("gruvbox")}</option>
             <option value="monokai">{getThemeDisplayName("monokai")}</option>

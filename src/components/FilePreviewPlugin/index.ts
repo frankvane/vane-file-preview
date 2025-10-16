@@ -11,9 +11,12 @@ export type {
 } from "./core/FilePreviewCore";
 
 // 插件系统
-export { withPlugins, createPluginBus, createPluginManager } from "./plugins";
+export { withPlugins } from "./plugins/withPlugins";
+export { createPluginBus } from "./plugins/PluginBus";
+export { createPluginManager } from "./plugins/PluginManager";
+
+// 类型定义
 export type {
-  WithPluginsConfig,
   FileInfo,
   PreviewDimensions,
   PreviewProgress,
@@ -24,7 +27,7 @@ export type {
   PluginHooks,
   FilePreviewPlugin,
   PluginManager,
-} from "./plugins";
+} from "./plugins/types";
 
 // 预览插件
 export * from "./custom-plugins";

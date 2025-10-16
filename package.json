@@ -12,13 +12,20 @@
       "require": "./dist/index.umd.js",
       "types": "./dist/index.d.ts"
     },
-    "./plugins": {
-      "types": "./dist/plugins/index.d.ts",
-      "import": "./dist/plugins/index.js"
+    "./core": {
+      "import": "./dist/core/index.es.js",
+      "require": "./dist/core/index.umd.js",
+      "types": "./dist/core/index.d.ts"
     },
-    "./custom-plugins/*": {
-      "types": "./dist/custom-plugins/*/index.d.ts",
-      "import": "./dist/custom-plugins/*/index.js"
+    "./plugins": {
+      "import": "./dist/plugins/index.es.js",
+      "require": "./dist/plugins/index.umd.js",
+      "types": "./dist/plugins/index.d.ts"
+    },
+    "./plugins/*": {
+      "import": "./dist/plugins/*/index.es.js",
+      "require": "./dist/plugins/*/index.umd.js",
+      "types": "./dist/plugins/*/index.d.ts"
     }
   },
   "files": [
@@ -43,11 +50,15 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build --mode lib",
+    "build:core": "tsc -b && vite build --mode core",
+    "build:plugins": "tsc -b && vite build --mode plugins",
+    "build:full": "tsc -b && vite build --mode lib",
+    "build:optimized": "node scripts/build-optimized.js",
     "build:demo": "vite build",
     "preview": "vite preview",
     "preview:demo": "vite preview --outDir vane-file-preview",
     "lint": "eslint .",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build:optimized"
   },
   "dependencies": {
     "@types/papaparse": "^5.3.16",

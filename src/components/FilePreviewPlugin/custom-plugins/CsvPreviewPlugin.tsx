@@ -20,7 +20,7 @@ interface CsvData {
   totalRows: number;
 }
 
-interface CsvPreviewConfig {
+export interface CsvPreviewConfig {
   pageSize?: number;
   maxPreviewRows?: number;
   autoDetectDelimiter?: boolean;

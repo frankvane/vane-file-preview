@@ -81,7 +81,61 @@ export default defineConfig(({ command, mode }) => {
               },
             },
           ],
-          external: ["react", "react-dom", "react-router-dom"],
+          // 外部化大型依赖，让用户自己安装
+          external: [
+            "react",
+            "react-dom",
+            "react-router-dom",
+            // 外部化大型第三方库
+            "pdfjs-dist",
+            "xlsx",
+            "mammoth",
+            "jszip",
+            "highlight.js",
+            "react-syntax-highlighter",
+            "react-markdown",
+            "react-pdf",
+            "react-player",
+            "react-reader",
+            "react-h5-audio-player",
+            "papaparse",
+            "docx-preview",
+            "pptx-parser",
+            "@uiw/react-json-view",
+            "rehype-katex",
+            "rehype-highlight",
+            "rehype-raw",
+            "remark-gfm",
+            "remark-math",
+            "remark-breaks",
+          ],
+          // 代码分割配置
+          manualChunks: {
+            // 核心库
+            core: ["react", "react-dom"],
+            // PDF 相关
+            pdf: ["pdfjs-dist", "react-pdf"],
+            // Office 文档相关
+            office: ["xlsx", "mammoth", "docx-preview", "pptx-parser"],
+            // 代码高亮相关
+            syntax: ["highlight.js", "react-syntax-highlighter"],
+            // Markdown 相关
+            markdown: [
+              "react-markdown",
+              "rehype-katex",
+              "rehype-highlight",
+              "remark-gfm",
+              "remark-math",
+            ],
+            // 媒体相关
+            media: ["react-player", "react-h5-audio-player"],
+            // 数据解析相关
+            data: ["papaparse", "jszip"],
+            // 电子书相关
+            epub: ["react-reader"],
+            // JSON 相关
+            json: ["@uiw/react-json-view"],
+          },
         },
       },
     };

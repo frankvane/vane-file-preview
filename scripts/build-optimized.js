@@ -5,9 +5,13 @@
  * 分别构建核心包和插件包
  */
 
-const { execSync } = require("child_process");
-const fs = require("fs");
-const path = require("path");
+import { execSync } from "child_process";
+import { fileURLToPath } from "url";
+import fs from "fs";
+import path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 console.log("🚀 开始优化构建...\n");
 

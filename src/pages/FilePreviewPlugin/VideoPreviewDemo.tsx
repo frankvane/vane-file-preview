@@ -10,7 +10,7 @@ import {
   withPlugins,
   createVideoPreviewPlugin,
   type FileInfo,
-} from "../../components/FilePreviewPlugin";
+} from "vane-file-preview";
 
 // 示例视频文件列表
 const videoFiles: FileInfo[] = [

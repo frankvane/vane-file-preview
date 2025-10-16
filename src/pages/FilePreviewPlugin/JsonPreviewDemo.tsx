@@ -10,7 +10,7 @@ import {
   withPlugins,
   createJsonPreviewPlugin,
   type FileInfo,
-} from "../../components/FilePreviewPlugin";
+} from "vane-file-preview";
 
 // 示例JSON文件列表
 const jsonFiles: FileInfo[] = [

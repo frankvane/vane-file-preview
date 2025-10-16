@@ -10,7 +10,7 @@ import {
   withPlugins,
   createPdfPreviewPlugin,
   type FileInfo,
-} from "../../components/FilePreviewPlugin";
+} from "vane-file-preview";
 
 // 示例PDF文件列表
 const pdfFiles: FileInfo[] = [

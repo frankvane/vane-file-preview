@@ -10,7 +10,7 @@ import {
   withPlugins,
   createZipPreviewPlugin,
   type FileInfo,
-} from "../../components/FilePreviewPlugin";
+} from "vane-file-preview";
 
 // 示例ZIP文件列表
 const zipFiles: FileInfo[] = [
@@ -56,7 +56,6 @@ export default function ZipPreviewDemo() {
             background: "#f5f5f5",
             borderRadius: 8,
             padding: 16,
-            overflow: "auto",
             flexShrink: 0,
           }}
         >

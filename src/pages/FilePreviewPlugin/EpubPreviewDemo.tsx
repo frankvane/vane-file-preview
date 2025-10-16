@@ -10,7 +10,7 @@ import {
   withPlugins,
   createSimpleReactReaderEpubPlugin,
   type FileInfo,
-} from "../../components/FilePreviewPlugin";
+} from "vane-file-preview";
 
 // 示例EPUB文件列表
 const epubFiles: FileInfo[] = [

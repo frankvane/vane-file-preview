@@ -10,7 +10,7 @@ import {
   withPlugins,
   createCsvPreviewPlugin,
   type FileInfo,
-} from "../../components/FilePreviewPlugin";
+} from "vane-file-preview";
 
 // 示例CSV文件列表
 const csvFiles: FileInfo[] = [

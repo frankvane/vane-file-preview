@@ -10,7 +10,7 @@ import {
   withPlugins,
   createCodePreviewPlugin,
   type FileInfo,
-} from "../../components/FilePreviewPlugin";
+} from "vane-file-preview";
 
 // 示例代码文件列表
 const codeFiles: FileInfo[] = [
